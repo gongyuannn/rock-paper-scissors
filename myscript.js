@@ -44,7 +44,7 @@ function getHumanChoice(){
                 break;
 // If invalid input, prompt user to enter the input again until valid
             default:
-                alert("Please enter a valid number.");
+                alert("Please enter a valid input - rock, paper or scissors.");
          }
     }
 }
