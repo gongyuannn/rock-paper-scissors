@@ -23,3 +23,33 @@ function getComputerChoice(){
 console.log(getComputerChoice());
 
 // Step 2. Human Choice
+// Create function for Human Choice
+function getHumanChoice(){
+// Prompt user input
+    while(true){
+        let humanChoice = prompt(`Enter a number from 1 to 3. 
+        1 - rock
+        2 - paper
+        3 - scissors`)
+        switch(humanChoice){
+            case "1":
+                return humanChoice = "rock";
+                break;
+            case "2":
+                return humanChoice = "paper";
+                break;
+            case "3":
+                return humanChoice = "scissors";
+                break;
+            default:
+                alert("Please enter a valid number.");
+         }
+    }
+}
+
+// Check that the input is valid - only 1("rock"), 2("paper") or 3("scissors") - Use while 'true' loop
+
+
+// If valid, store the input into a variable
+// If invalid input, prompt user to enter the input again until valid
+getHumanChoice();
