@@ -1,0 +1,1 @@
+This is a fundamental project to test out Javascript fundamentals, and develop a coding logic for a rock, paper and scissors game.
