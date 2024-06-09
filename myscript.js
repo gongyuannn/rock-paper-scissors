@@ -24,8 +24,7 @@ function getComputerChoice(){
 // Create function for Human Choice
 function getHumanChoice(){
 // Prompt user input
-// TO FIX: Check that the input is valid - only 1("rock"), 2("paper") or 3("scissors") - Use while 'true' loop
-
+// Check that the input is valid and case-insensitive
     while(true){
         let humanChoice = prompt(`Enter one of the following:
         - rock
@@ -49,6 +48,10 @@ function getHumanChoice(){
     }
 }
 
+// Step 5: Write logic to play 5 rounds
+// Create a function to play 5 rounds
+function playGame(){
+
 // Step 3: Declare player score variables
 // Create a variable in global scope to store human score
 let humanScore = 0;
@@ -59,35 +62,63 @@ let computerScore = 0;
 
 // Step 4: Write logic to play a single round
 // Create a function that takes in human and computer choices as parameters
+// Compare human and computer choice and account for each scenario - update points if there is a win.
+// Move playRound function to playGame function
 function playRound(humanChoice, computerChoice){
     if(humanChoice=="rock" && computerChoice=="scissors"){
+        console.log("You chose rock.");
         console.log("Computer chose scissors.");
         console.log("You win! Rock beats scissors!");
         humanScore++;
     } else if(humanChoice=="rock"&& computerChoice=="paper"){
+        console.log("You chose rock.");
         console.log("Computer chose paper.");
         console.log("You lose! Paper beats rock!");
         computerScore++;
     } else if(humanChoice=="rock"&& computerChoice=="rock"){
+        console.log("You chose rock.");
         console.log("Computer chose rock.");
-        console.log("It's a tie! Go again");
-    }
-
+        console.log("It's a tie!");
+    } else if(humanChoice=="paper"&& computerChoice=="scissors"){
+        console.log("You chose paper.");
+        console.log("Computer chose scissors.");
+        console.log("You lose! Scissors beats paper!");
+        computerScore++;
+    } else if(humanChoice=="paper"&& computerChoice=="paper"){
+        console.log("You chose paper.");
+        console.log("Computer chose paper.");
+        console.log("It's a tie!");
+    }  else if(humanChoice=="paper"&& computerChoice=="rock"){
+        console.log("You chose paper.");
+        console.log("Computer chose rock.");
+        console.log("You win! Paper beats rock!");
+        humanScore++;
+    } else if(humanChoice=="scissors"&& computerChoice=="scissors"){
+        console.log("You chose scissors.");
+        console.log("Computer chose scissors.");
+        console.log("It's a tie!");
+    }  else if(humanChoice=="scissors"&& computerChoice=="paper"){
+        console.log("You chose scissors.");
+        console.log("Computer chose paper.");
+        console.log("You win! Scissors beats paper!");
+        humanScore++;
+    } else if(humanChoice=="scissors"&& computerChoice=="rock"){
+        console.log("You chose scissors.");
+        console.log("Computer chose rock.");
+        console.log("You lose! Rock beats scissors!");
+        computerScore++;
+    } 
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+// Call playRound function 5 times (Total score must reach 5)
+while(humanScore + computerScore <5){
+    playRound(getHumanChoice(), getComputerChoice());
+}
+// Print out scores
+console.log(`Your score: ${humanScore}
+Computer score: ${computerScore} `);
+}
 
-// Ensure that human choice parameter is case-insensitive
-// Compare human and computer choice
-// If human and computer is same, it is a tie. Go again.
-// If human is rock, and computer is scissors, human wins. Add 1 to human score.
-// If human is rock, and computer is paper, human loses. Add 1 to computer score.
-// If human is scissors, and computer is paper, human wins. Add 1 to human score.
-// If human is scissors, and computer is rock, human loses. Add 1 to computer score.
-// If human is paper, and computer is rock, human wins. Add 1 to human score.
-// If human is paper, and computer is scissors, human loses. Add 1 to computer score.
+// Implement game
+playGame();
 
-// Step 5: Write logic to play 5 rounds
-// Create a function to play 5 rounds
-// Move playRound function to playGame function
-// Call playRound function 5 times
