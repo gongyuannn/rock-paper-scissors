@@ -12,7 +12,7 @@ function getComputerChoice(){
 // If the no. is 3, return "scissors";
     if(number===1){
         computerChoice = "rock";
-    } else if (number===2){
+    } else if (number===2){ 
         computerChoice = "paper";
     } else if (number===3){
         computerChoice = "scissors";
@@ -117,6 +117,7 @@ while(humanScore + computerScore <5){
 // Print out scores
 console.log(`Your score: ${humanScore}
 Computer score: ${computerScore} `);
+alert(`Press ctrl+option+J to see full log.`)
 }
 
 // Implement game
