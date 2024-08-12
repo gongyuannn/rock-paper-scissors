@@ -84,6 +84,19 @@ h1 {
     font-weight: bold;
 }
 
+#reset-game {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #1d5433;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: none;
+}
+
 @media (max-width: 600px) {
     .image-box {
         flex: 1 1 100%;
