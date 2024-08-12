@@ -1,85 +1,118 @@
 
 var playerSelection;
 var pcSelection;
+var round = 1;
+var playerScore = 0;
+var pcScore = 0;
+
+// Select the reset button and hide it initially
+const resetButton = document.querySelector("#reset-game");
+resetButton.style.display = "none";
 
 // Click button to play round
-
-const playerButtons = document.querySelectorAll("button");
+const playerButtons = document.querySelectorAll(".btn");
 playerButtons.forEach((playerButton) => {
     playerButton.addEventListener("click", () => {
-        playerSelection = playerButton.id;
-        getPcSelection();
-        playRound(playerSelection, pcSelection);
+        // Check if scores are <5
+        if(playerScore <5 && pcScore <5) {
+            playerSelection = playerButton.id;
+            getPcSelection();
+            playRound(playerSelection, pcSelection);
+            round++;
+        }
+
+        // Check if the game is over
+        if(playerScore === 5 || pcScore === 5){
+            result.textContent = (playerScore > pcScore)?  "You win!": "PC wins!";
+
+            // Stop the game by disabling the buttons
+            playerButtons.forEach(playerButton => playerButton.disabled = true);
+
+            // Show the reset button
+            resetButton.style.display = "block";
+        
+        }
     })
 })
-
 
 // Function to randomly return "rock", "paper", "scissors"
 function getPcSelection(){
     let number = Math.floor(Math.random()*3)+1;
 
     if(number===1){
-        pcSelection = "rock";
+        pcSelection = "Rock";
     } else if (number===2){ 
-        pcSelection = "paper";
+        pcSelection = "Paper";
     } else if (number===3){
-        pcSelection = "scissors";
+        pcSelection = "Scissors";
     }
     return pcSelection;
 }
 
+const result = document.querySelector("#result");
+const player = document.querySelector("#player-score");
+const pc = document.querySelector("#pc-score");
 
 // Create a function to play a round
-// Instead of console.log, it should be DOM methods to register:
-// - player Selection
-// - pc Selection
-// - result
-// - change score (if relevant)
-// - end game once score of 5 is reached
-// - announce winner
-
 function playRound(playerSelection, pcSelection){
-    if(playerSelection=="rock" && pcSelection=="scissors"){
-        console.log("You chose rock.");
-        console.log("Computer chose scissors.");
-        console.log("You win! Rock beats scissors!");
-        // humanScore++;
-    } else if(playerSelection=="rock"&& pcSelection=="paper"){
-        console.log("You chose rock.");
-        console.log("Computer chose paper.");
-        console.log("You lose! Paper beats rock!");
-        // computerScore++;
-    } else if(playerSelection=="rock"&& pcSelection=="rock"){
-        console.log("You chose rock.");
-        console.log("Computer chose rock.");
-        // console.log("It's a tie!");
-    } else if(playerSelection=="paper"&& pcSelection=="scissors"){
-        console.log("You chose paper.");
-        console.log("Computer chose scissors.");
-        console.log("You lose! Scissors beats paper!");
-        // computerScore++;
-    } else if(playerSelection=="paper"&& pcSelection=="paper"){
-        console.log("You chose paper.");
-        console.log("Computer chose paper.");
-        console.log("It's a tie!");
-    }  else if(playerSelection=="paper"&& pcSelection=="rock"){
-        console.log("You chose paper.");
-        console.log("Computer chose rock.");
-        console.log("You win! Paper beats rock!");
-        // humanScore++;
-    } else if(playerSelection=="scissors"&& pcSelection=="scissors"){
-        console.log("You chose scissors.");
-        console.log("Computer chose scissors.");
-        console.log("It's a tie!");
-    }  else if(playerSelection=="scissors"&& pcSelection=="paper"){
-        console.log("You chose scissors.");
-        console.log("Computer chose paper.");
-        console.log("You win! Scissors beats paper!");
-        // humanScore++;
-    } else if(playerSelection=="scissors"&& pcSelection=="rock"){
-        console.log("You chose scissors.");
-        console.log("Computer chose rock.");
-        console.log("You lose! Rock beats scissors!");
-        // computerScore++;
+    if(playerSelection=="Rock" && pcSelection=="Scissors"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You win! ${playerSelection} beats ${pcSelection}.`;
+        playerScore++;
+        player.textContent = `Player: ${playerScore}`;
+    } else if(playerSelection=="Rock"&& pcSelection=="Paper"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You lose! ${pcSelection} beats ${playerSelection}.`;
+        pcScore++;
+        pc.textContent = `PC: ${pcScore}`;
+    } else if(playerSelection=="Rock"&& pcSelection=="Rock"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. It's a tie.`;
+    } else if(playerSelection=="Paper"&& pcSelection=="Scissors"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You lose! ${pcSelection} beats ${playerSelection}.`;
+        pcScore++;
+        pc.textContent = `PC: ${pcScore}`;
+    } else if(playerSelection=="Paper"&& pcSelection=="Paper"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. It's a tie.`;
+    }  else if(playerSelection=="Paper"&& pcSelection=="Rock"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You win! ${playerSelection} beats ${pcSelection}.`;
+        playerScore++;
+        player.textContent = `Player: ${playerScore}`;
+    } else if(playerSelection=="Scissors"&& pcSelection=="Scissors"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. It's a tie.`;
+    }  else if(playerSelection=="Scissors"&& pcSelection=="Paper"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You win! ${playerSelection} beats ${pcSelection}.`;
+        playerScore++;
+        player.textContent = `Player: ${playerScore}`;
+    } else if(playerSelection=="Scissors"&& pcSelection=="Rock"){
+        result.textContent = 
+        `Round ${round}: You choose ${playerSelection}. Computer chose ${pcSelection}. You lose! ${pcSelection} beats ${playerSelection}.`;
+        pcScore++;
+        pc.textContent = `PC: ${pcScore}`;
     } 
 }
+
+
+// Reset the game
+
+resetButton.addEventListener("click", () => {
+    playerScore = 0;
+    pcScore = 0;
+    round = 1;
+    player.textContent = `Player: ${playerScore}`;
+    pc.textContent = `PC: ${pcScore}`;
+    result.textContent = "Game reset.";
+
+    // Re-enable player choices buttons
+    playerButtons.forEach(playerButton => playerButton.disabled = false);
+
+    // Hide the reset button
+    resetButton.style.display = "none";
+
+})
+

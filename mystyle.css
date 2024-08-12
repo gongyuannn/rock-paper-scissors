@@ -78,8 +78,7 @@ h1 {
     padding: 10px 20px;
 }
 
-#player-score,
-#pc-score {
+#player-score, #pc-score {
     margin: 0;
     font-size: 18px;
     font-weight: bold;
